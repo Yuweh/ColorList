@@ -70,21 +70,16 @@ extension ToDoListViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
         cell.textLabel?.text = itemArray[indexPath.row].title
-        
-        cell.accessoryType = itemArray[indexPath.row].done == true ? .checkmark : .none
+        let item = itemArray[indexPath.row]
+        cell.accessoryType = item.done ? .checkmark : .none
         return cell
     }
     
     //MARK: Tabbleview Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print(itemArray[indexPath.row])
-        itemArray[indexPath.row].done == false ? true : false
-        if tableView.cellForRow(at: indexPath)?.accessoryType ==  .checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType =  .none
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType =  .checkmark
-        }
-        
+        itemArray[indexPath.row].done == !itemArray[indexPath.row].done
+        self.tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
