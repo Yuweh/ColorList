@@ -1,0 +1,6 @@
+framework module Pods_ColorList {
+  umbrella header "Pods-ColorList-umbrella.h"
+
+  export *
+  module * { export * }
+}
